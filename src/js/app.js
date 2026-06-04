@@ -1,22 +1,51 @@
-const allTags = ['Все', ...new Set(DATA.map(d => d.tag))];
+DATA_1.forEach((d, i) => { d.n = i + 1; d.sem = 1; });
+DATA_2.forEach((d, i) => { d.n = i + 1; d.sem = 2; });
+const DATA = [...DATA_1, ...DATA_2];
+
+let activeSem = 0;
 let activeTag = 'Все';
 let searchQuery = '';
 let openId = null;
 
-// Build tags
-const tagsRow = document.getElementById('tagsRow');
-allTags.forEach(t => {
-    const el = document.createElement('div');
-    el.className = 'tag' + (t === 'Все' ? ' active' : '');
-    el.textContent = t;
-    el.addEventListener('click', () => {
-        activeTag = t;
-        document.querySelectorAll('.tag').forEach(x => x.classList.remove('active'));
-        el.classList.add('active');
+// Semester switcher
+const semRow = document.getElementById('semRow');
+[{ label: '1 семестр', val: 1 }, { label: '2 семестр', val: 2 }].forEach(({ label, val }) => {
+    const btn = document.createElement('button');
+    btn.className = 'sem-btn';
+    btn.textContent = label;
+    btn.addEventListener('click', () => {
+        activeSem = activeSem === val ? 0 : val;
+        document.querySelectorAll('.sem-btn').forEach(b => b.classList.remove('active'));
+        if (activeSem === val) btn.classList.add('active');
+        activeTag = 'Все';
+        buildTags();
         render();
     });
-    tagsRow.appendChild(el);
+    semRow.appendChild(btn);
 });
+
+// Build topic tags (filtered by active semester)
+const tagsRow = document.getElementById('tagsRow');
+
+function buildTags() {
+    const pool = activeSem ? DATA.filter(d => d.sem === activeSem) : DATA;
+    const tags = ['Все', ...new Set(pool.map(d => d.tag))];
+    tagsRow.innerHTML = '';
+    tags.forEach(t => {
+        const el = document.createElement('div');
+        el.className = 'tag' + (t === activeTag ? ' active' : '');
+        el.textContent = t;
+        el.addEventListener('click', () => {
+            activeTag = t;
+            document.querySelectorAll('.tag').forEach(x => x.classList.remove('active'));
+            el.classList.add('active');
+            render();
+        });
+        tagsRow.appendChild(el);
+    });
+}
+
+buildTags();
 
 // Search
 const searchInput = document.getElementById('searchInput');
@@ -67,6 +96,7 @@ function render() {
     const counter = document.getElementById('counter');
 
     const items = DATA.filter(d =>
+        (!activeSem || d.sem === activeSem) &&
         (activeTag === 'Все' || d.tag === activeTag) &&
         (!searchQuery || d.question.toLowerCase().includes(searchQuery))
     );
@@ -92,7 +122,7 @@ function render() {
         return `
     <div class="card ${openId === d.id ? 'open' : ''}" data-id="${d.id}">
         <div class="card-header" onclick="toggle(${d.id})">
-            <div class="card-badge">${d.id}</div>
+            <div class="card-badge">${d.n}</div>
             <div class="card-question">${highlight(d.question, searchQuery)}</div>
             <div class="card-chevron">›</div>
         </div>

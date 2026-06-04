@@ -1,4 +1,4 @@
-const DATA = [
+const DATA_1 = [
     {
         id: 2,
         tag: "Отображения",

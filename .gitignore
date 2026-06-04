@@ -1,0 +1,19 @@
+# Личные файлы и тулы — не для гита
+private/
+CLAUDE.md
+
+# IDE
+.idea/
+.claude/
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs / temp
+*.log
+*.tmp
+*.bak
+*.swp
+*~

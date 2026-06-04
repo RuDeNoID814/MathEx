@@ -282,6 +282,44 @@ body {
 .answer-text p:last-child { margin-bottom: 0; }
 .answer-text br { display: block; margin-bottom: 6px; content: ''; }
 
+/* PROOF */
+.proof-btn {
+    display: inline-block;
+    margin-top: 10px;
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 600;
+    font-family: 'DM Sans', sans-serif;
+    padding: 4px 10px;
+    cursor: pointer;
+    letter-spacing: 0.4px;
+    transition: all 0.15s;
+}
+
+.proof-btn:active { color: var(--accent2); border-color: var(--accent2); }
+
+.proof-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s cubic-bezier(0.4,0,0.2,1);
+}
+
+.proof-body.open {
+    max-height: 9999px;
+}
+
+.proof-text {
+    font-size: 13px;
+    line-height: 1.8;
+    color: #9898c8;
+    padding-top: 10px;
+    border-top: 1px dashed var(--border);
+    margin-top: 10px;
+}
+
 .note {
     background: rgba(112,96,248,0.12);
     border-left: 2px solid var(--accent2);

@@ -114,10 +114,16 @@ function render() {
 
     list.innerHTML = items.map(d => {
         const isGraph = d.answer === '__GRAPH__';
+        const proofBlock = d.proof ? `
+            <button class="proof-btn" onclick="toggleProof(${d.id}, this)">Доказательство ›</button>
+            <div class="proof-body" id="proof-${d.id}">
+                <div class="proof-text" id="proof-text-${d.id}">${formatAnswer(d.proof)}</div>
+            </div>` : '';
         const bodyContent = isGraph ? buildGraphCard(d.id) : `
             <div class="card-answer">
                 <div class="answer-label">Определение</div>
                 <div class="answer-text" id="ans-${d.id}">${formatAnswer(d.answer)}</div>
+                ${proofBlock}
             </div>`;
         return `
     <div class="card ${openId === d.id ? 'open' : ''}" data-id="${d.id}">
@@ -159,6 +165,16 @@ function typeset(id) {
     if (!window.MathJax) return;
     const el = document.getElementById('ans-' + id);
     if (el) MathJax.typesetPromise([el]).catch(() => {});
+}
+
+function toggleProof(id, btn) {
+    const body = document.getElementById('proof-' + id);
+    const open = body.classList.toggle('open');
+    btn.textContent = open ? 'Доказательство ↑' : 'Доказательство ›';
+    if (open && window.MathJax) {
+        const el = document.getElementById('proof-text-' + id);
+        if (el) MathJax.typesetPromise([el]).catch(() => {});
+    }
 }
 
 function toggle(id) {

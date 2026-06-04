@@ -307,7 +307,7 @@ $$\\forall \\varepsilon > 0 \\;\\; \\exists \\delta > 0 \\;\\; \\forall x \\in O
     {
         id: 1030,
         tag: "Непрерывность функции и вектор-функции многих переменных",
-        question: "Определение вектор-функции и её компонент",
+        question: "Определение вектор-функции и ее компонент",
         answer: `Вектор-функцией называется отображение $f: \\mathbb{R}^n \\to \\mathbb{R}^m$, где
 $$f(x^1, \\dots, x^n) = \\big( y^1 = \\phi^1(x^1, \\dots, x^n);\\; \\dots\\; ;\\; y^m = \\phi^m(x^1, \\dots, x^n) \\big)$$
 
@@ -357,6 +357,132 @@ $$\\forall \\varepsilon > 0 \\;\\; \\exists \\delta > 0 \\;\\; \\forall x: \\qua
 2. $f$ ограничена на $K$.
 3. $f$ достигает max и min на $K$.
 4. Пусть $f: S \\to \\mathbb{R}$ непрерывна на связном $S \\subset \\mathbb{R}^n$ и $f(a) = A,\\ f(b) = B$, тогда $\\forall C \\in (A, B)\\ \\exists c \\in S: f(c) = C$.`
+    },
+
+
+    // ─── 7. ДИФФЕРЕНЦИРОВАНИЕ ФУНКЦИЙ МНОГИХ ПЕРЕМЕННЫХ ──────────────────────
+
+    {
+        id: 1035,
+        tag: "Дифференцирование функций многих переменных",
+        question: "Определение частной производной",
+        answer: `Пусть $f: \\mathbb{R}^n \\to \\mathbb{R}$ определена в $O(x_0)$, а функция $\\psi(x^1) = f(x^1, {x_0}^2, \\dots, {x_0}^n)$ дифференцируема в точке $x_0^1$. Тогда:
+$$\\frac{\\partial f}{\\partial x^1}(x_0) = \\lim_{\\Delta x \\to 0} \\frac{f({x_0}^1 + \\Delta x,\\, {x_0}^2, \\dots, {x_0}^n) - f({x_0}^1, \\dots, {x_0}^n)}{\\Delta x}$$
+называется частной производной функции $f$ в точке $x_0$ по переменной $x^1$.`
+    },
+
+    {
+        id: 1036,
+        tag: "Дифференцирование функций многих переменных",
+        question: "Определение функции, дифференцируемой в точке",
+        answer: `Функция $f: \\mathbb{R}^n \\to \\mathbb{R}$ называется дифференцируемой в точке $x_0 \\in \\mathbb{R}^n$, если $\\exists A_1(x_0), \\dots, A_n(x_0)$ такие, что:
+$$f(x) - f(x_0) = \\sum_{i=1}^n A_i(x_0) \\cdot \\Delta x^i + o(d(x, x_0)) \\quad \\text{при } x \\to x_0, \\quad \\text{где } \\Delta x^i = x^i - {x_0}^i$$`
+    },
+
+    {
+        id: 1037,
+        tag: "Дифференцирование функций многих переменных",
+        question: "Определение вектор-функции, дифференцируемой в точке",
+        answer: `Вектор-функция $f: \\mathbb{R}^n \\to \\mathbb{R}^m$ называется дифференцируемой в точке $x_0 \\in \\mathbb{R}^n$, если существует линейное отображение $L(x_0): \\mathbb{R}^n \\to \\mathbb{R}^m$ такое, что:
+$$f(x) - f(x_0) = L(x_0) \\cdot \\Delta x + o(d(x, x_0)) \\quad \\text{при } x \\to x_0, \\quad \\text{где } \\Delta x = (\\Delta x^1, \\dots, \\Delta x^n)$$`
+    },
+
+    {
+        id: 1038,
+        tag: "Дифференцирование функций многих переменных",
+        question: "Определение функции, дифференцируемой на множестве",
+        answer: `$f$ называется дифференцируемой на множестве $M$, если $f$ дифференцируема в каждой точке $x \\in M$:
+$$f(x + h) = f(x) + J_f(x) \\cdot h + o(\\|h\\|) \\quad \\text{при } h \\to 0$$`
+    },
+
+    {
+        id: 1039,
+        tag: "Дифференцирование функций многих переменных",
+        question: "Определение вектор-функции, дифференцируемой на множестве",
+        answer: `Вектор-функция $F$ дифференцируема на множестве $X$, если $F$ дифференцируема в каждой точке $x \\in X$.`
+    },
+
+    {
+        id: 1040,
+        tag: "Дифференцирование функций многих переменных",
+        question: "Определение дифференциала функции многих переменных",
+        answer: `Дифференциалом функции $f$ в точке $x_0$ называется линейная функция $df(x_0): \\mathbb{R}^n \\to \\mathbb{R}$:
+$$df(x_0) = \\sum_{i=1}^n \\frac{\\partial f}{\\partial x^i}(x_0) \\cdot \\Delta x^i = \\frac{\\partial f}{\\partial x^1}(x_0)\\, dx^1 + \\dots + \\frac{\\partial f}{\\partial x^n}(x_0)\\, dx^n$$`
+    },
+
+    {
+        id: 1041,
+        tag: "Дифференцирование функций многих переменных",
+        question: "Определение матрицы Якоби вектор-функции",
+        answer: `Пусть $\\mathbf{F}: D \\to \\mathbb{R}^m$, $\\mathbf{F}(\\mathbf{x}) = \\big(f_1(\\mathbf{x}), \\dots, f_m(\\mathbf{x})\\big)$, $\\mathbf{x} = (x_1, \\dots, x_n)$.
+
+Матрицей Якоби вектор-функции $\\mathbf{F}$ в точке $\\mathbf{x}$ называется матрица $m \\times n$:
+$$J_{\\mathbf{F}}(\\mathbf{x}) = \\begin{pmatrix} \\frac{\\partial f_1}{\\partial x_1} & \\frac{\\partial f_1}{\\partial x_2} & \\dots & \\frac{\\partial f_1}{\\partial x_n} \\\\ \\frac{\\partial f_2}{\\partial x_1} & \\frac{\\partial f_2}{\\partial x_2} & \\dots & \\frac{\\partial f_2}{\\partial x_n} \\\\ \\vdots & \\vdots & \\ddots & \\vdots \\\\ \\frac{\\partial f_m}{\\partial x_1} & \\frac{\\partial f_m}{\\partial x_2} & \\dots & \\frac{\\partial f_m}{\\partial x_n} \\end{pmatrix}$$`
+    },
+
+    {
+        id: 1042,
+        tag: "Дифференцирование функций многих переменных",
+        question: "Определение неявной функции многих переменных",
+        answer: `Пусть задано уравнение $F(x_1, \\dots, x_n, y) = 0$, где $F: \\mathbb{R}^{n+1} \\to \\mathbb{R}$.
+
+Уравнение $F(x, y) = 0$ задаёт неявную функцию $y = f(x_1, \\dots, x_n)$ в окрестности точки $(x_0, y_0)$, если существует окрестность $U \\subset \\mathbb{R}^n$ точки $x_0$, такая что $\\forall x \\in U$:
+- $y_0 = f(x_0)$
+- $F(x, f(x)) = 0$
+- $f$ непрерывна на $U$`
+    },
+
+    {
+        id: 1043,
+        tag: "Дифференцирование функций многих переменных",
+        question: "Простейший вариант теоремы о неявной функции",
+        answer: `Пусть $F(x_0, y_0) = 0$, $F \\in C^1$ в окрестности $(x_0, y_0)$ и $\\dfrac{\\partial F}{\\partial y}(x_0, y_0) \\neq 0$.
+
+Тогда существует окрестность $U$ точки $x_0$ и единственная функция $y = y(x)$ на $U$, такая что:
+- $y(x_0) = y_0$
+- $F(x, y(x)) = 0$ для всех $x \\in U$
+- $y(x)$ непрерывно дифференцируема на $U$
+
+Производная:
+$$y'(x) = -\\frac{\\dfrac{\\partial F}{\\partial x}(x, y(x))}{\\dfrac{\\partial F}{\\partial y}(x, y(x))}$$`
+    },
+
+    {
+        id: 1044,
+        tag: "Дифференцирование функций многих переменных",
+        question: "Якобианы полярной замены координат",
+        answer: `$$\\begin{cases} x = r \\cos\\varphi \\\\ y = r \\sin\\varphi \\end{cases} \\quad \\Rightarrow \\quad J = \\begin{vmatrix} \\cos\\varphi & \\sin\\varphi \\\\ -r\\sin\\varphi & r\\cos\\varphi \\end{vmatrix} = r(\\cos^2\\varphi + \\sin^2\\varphi) = r$$`
+    },
+
+    {
+        id: 1045,
+        tag: "Дифференцирование функций многих переменных",
+        question: "Якобиан сферической замены координат",
+        answer: `$$\\begin{cases} x = r \\sin\\psi \\cos\\varphi \\\\ y = r \\sin\\psi \\sin\\varphi \\\\ z = r \\cos\\psi \\end{cases} \\quad \\text{где } 0 \\le \\psi \\le \\pi, \\quad 0 \\le \\varphi \\le 2\\pi$$
+
+$$|J| = \\begin{vmatrix} \\sin\\psi\\cos\\varphi & \\sin\\psi\\sin\\varphi & \\cos\\psi \\\\ -r\\sin\\psi\\sin\\varphi & r\\sin\\psi\\cos\\varphi & 0 \\\\ -r\\cos\\psi\\cos\\varphi & -r\\cos\\psi\\sin\\varphi & r\\cos\\psi \\end{vmatrix} = \\dots = r^2 \\cos\\psi$$`
+    },
+
+    {
+        id: 1046,
+        tag: "Дифференцирование функций многих переменных",
+        question: "Градиент и производная по направлению",
+        answer: `Производная по направлению вектора $v$ ($\\|v\\| = 1$):
+$$\\frac{\\partial f}{\\partial v} = \\lim_{t \\to 0} \\frac{f(x_0 + v \\cdot t) - f(x_0)}{t} = (\\nabla f(x_0),\\, v)$$
+
+Градиент — вектор из частных производных первого порядка:
+$$\\nabla f(x_0) = \\left\\{ \\frac{\\partial f}{\\partial x^1}(x_0), \\dots, \\frac{\\partial f}{\\partial x^n}(x_0) \\right\\} = \\operatorname{grad}\\, f(x_0)$$`
+    },
+
+    {
+        id: 1047,
+        tag: "Дифференцирование функций многих переменных",
+        question: "Касательная плоскость к поверхности, заданной в явном и неявном виде",
+        answer: `Явный вид $z = f(x, y)$:
+$$z - z_0 = \\frac{\\partial f}{\\partial x}(x_0, y_0) \\cdot (x - x_0) + \\frac{\\partial f}{\\partial y}(x_0, y_0) \\cdot (y - y_0)$$
+
+Неявный вид $F(x, y, z) = 0$:
+$$F_x(x_0, y_0, z_0)(x - x_0) + F_y(x_0, y_0, z_0)(y - y_0) + F_z(x_0, y_0, z_0)(z - z_0) = 0$$`
     },
 
 ];

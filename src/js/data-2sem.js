@@ -596,4 +596,113 @@ $$G_f = \\begin{pmatrix} \\frac{\\partial^2 f}{\\partial x_1^2} & \\frac{\\parti
 4) Иные случаи $\\implies x_0$ — не локальный экстремум.`
     },
 
+
+    // ─── 11. УСЛОВНЫЙ ЭКСТРЕМУМ ────────────────────────────────────────────────
+
+    {
+        id: 1057,
+        tag: "Условный экстремум",
+        question: "Функция Лагранжа",
+        answer: `Пусть $u: \\mathbb{R}^n \\to \\mathbb{R}$, $f_1, \\dots, f_m: \\mathbb{R}^n \\to \\mathbb{R}$, $m < n$. Уравнения связи:
+$$\\begin{cases} f_1(x^1, \\dots, x^n) = 0 \\\\ \\dots \\\\ f_m(x^1, \\dots, x^n) = 0 \\end{cases}$$
+
+Пусть $\\lambda_1, \\dots, \\lambda_m \\in \\mathbb{R}$. Функцией Лагранжа называется:
+$$L(x^1, \\dots, x^n, \\lambda_1, \\dots, \\lambda_m) = u(x) + \\lambda_1 f_1(x) + \\dots + \\lambda_m f_m(x)$$`
+    },
+
+    {
+        id: 1058,
+        tag: "Условный экстремум",
+        question: "Стационарная точка функции Лагранжа",
+        answer: `Для функции Лагранжа:
+$$\\mathcal{L}(\\mathbf{x}, \\boldsymbol{\\lambda}) = f(\\mathbf{x}) + \\sum_{k=1}^m \\lambda_k \\, g_k(\\mathbf{x})$$
+
+Стационарная точка функции Лагранжа — точка $(\\mathbf{x}^*, \\boldsymbol{\\lambda}^*) \\in \\mathbb{R}^{n+m}$, в которой все частные производные $\\mathcal{L}$ равны нулю.`
+    },
+
+    {
+        id: 1059,
+        tag: "Условный экстремум",
+        question: "Достаточные условия условного экстремума",
+        answer: `Пусть $(x^*, \\lambda^*)$ — стационарная точка функции Лагранжа $\\mathcal{L}$. Рассмотрим второй дифференциал $d^2\\mathcal{L}$ в точке $x^*$ для приращений $dx$, удовлетворяющих уравнениям связей. Тогда:
+
+- Если $d^2\\mathcal{L} > 0$ для всех ненулевых $dx$ при $dg_k = 0$ — $x^*$ точка условного минимума.
+- Если $d^2\\mathcal{L} < 0$ для всех ненулевых $dx$ при $dg_k = 0$ — $x^*$ точка условного максимума.`
+    },
+
+
+    // ─── 12. МЕРА ЖОРДАНА ─────────────────────────────────────────────────────
+
+    {
+        id: 1060,
+        tag: "Мера Жордана",
+        question: "Разбиение множества",
+        answer: `Пусть $\\mathcal{D} \\subseteq \\mathbb{R}^n$. Разбиением $\\mathcal{D}$ называется конечный набор $\\{\\mathcal{D}_1, \\mathcal{D}_2, \\dots, \\mathcal{D}_N\\}$, такой что:
+
+1. $\\mathcal{D}_i \\neq \\emptyset$ для всех $i = 1, \\dots, N$
+2. $\\mathcal{D}_i \\cap \\mathcal{D}_j = \\emptyset$ при $i \\neq j$
+3. $\\bigcup_{i=1}^{N} \\mathcal{D}_i = \\mathcal{D}$`
+    },
+
+    {
+        id: 1061,
+        tag: "Мера Жордана",
+        question: "Определение клетки",
+        answer: `Клеткой называется множество:
+$$\\Pi = \\{ (x^1, \\dots, x^n) \\in \\mathbb{R}^n : a_i \\le x^i < b_i, \\; i = \\overline{1,n} \\}$$`
+    },
+
+    {
+        id: 1062,
+        tag: "Мера Жордана",
+        question: "Свойства клеток",
+        answer: `1. $\\Pi_1 \\cap \\Pi_2$ — клетка.
+2. Объединение конечного числа клеток — клеточное множество.
+3. $\\tilde{\\Pi}_1 \\cap \\tilde{\\Pi}_2$ — клеточное множество.
+4. $\\Pi_1 \\setminus \\Pi_2$ — клеточное множество.
+5. $\\tilde{\\Pi}_1 \\setminus \\tilde{\\Pi}_2$ — клеточное множество.
+6. Объединение конечного числа клеточных множеств — клеточное множество.`
+    },
+
+    {
+        id: 1063,
+        tag: "Мера Жордана",
+        question: "Клеточное множество. Мера клеточного множества",
+        answer: `Клеточным множеством называется конечное объединение попарно непересекающихся клеток:
+$$\\tilde{\\Pi} = \\bigcup_{i=1}^m \\Pi_i$$
+
+Мера клеточного множества:
+$$m(\\tilde{\\Pi}) = \\sum_{i=1}^m m(\\Pi_i)$$`
+    },
+
+    {
+        id: 1064,
+        tag: "Мера Жордана",
+        question: "Свойства меры клеточных множеств",
+        answer: `1. Если $\\tilde{\\Pi}_1, \\dots, \\tilde{\\Pi}_m$ попарно не пересекаются: $m\\!\\left(\\bigcup_{i=1}^m \\tilde{\\Pi}_i\\right) = \\sum_{i=1}^m m(\\tilde{\\Pi}_i)$.
+2. $\\tilde{\\Pi}_1 \\subseteq \\tilde{\\Pi}_2 \\Rightarrow m(\\tilde{\\Pi}_2) = m(\\tilde{\\Pi}_1) + m(\\tilde{\\Pi}_2 \\setminus \\tilde{\\Pi}_1)$.
+3. $m\\!\\left(\\bigcup_{i=1}^m \\tilde{\\Pi}_i\\right) \\le \\sum_{i=1}^m m(\\tilde{\\Pi}_i)$.
+4. $\\forall \\tilde{\\Pi}\\; \\exists\\, \\varepsilon > 0$ и $\\tilde{\\Pi}_\\varepsilon$: $\\tilde{\\Pi}_\\varepsilon \\subseteq \\mathring{\\tilde{\\Pi}} \\subseteq \\tilde{\\Pi}$.`
+    },
+
+    {
+        id: 1065,
+        tag: "Мера Жордана",
+        question: "Измеримое по Жордану множество",
+        answer: `Множество $\\Omega \\subset \\mathbb{R}^n$ называется измеримым по Жордану, если $\\forall \\varepsilon > 0$ существуют клеточные множества $\\tilde{\\Pi}_1$ и $\\tilde{\\Pi}_2$ такие, что:
+$$\\tilde{\\Pi}_1 \\subseteq \\Omega \\subseteq \\tilde{\\Pi}_2 \\quad \\text{и} \\quad m(\\tilde{\\Pi}_2) - m(\\tilde{\\Pi}_1) < \\varepsilon$$`
+    },
+
+    {
+        id: 1066,
+        tag: "Мера Жордана",
+        question: "Множество меры нуль. Свойства множеств меры нуль",
+        answer: `Множество $E \\subset \\mathbb{R}^n$ называется множеством меры нуль ($m(E) = 0$), если:
+$$\\forall \\varepsilon > 0 \\; \\exists \\tilde{\\Pi}_\\varepsilon : E \\subseteq \\tilde{\\Pi}_\\varepsilon \\; \\text{и} \\; m(\\tilde{\\Pi}_\\varepsilon) < \\varepsilon$$
+
+Свойства:
+1. Объединение конечного числа множеств меры нуль — множество меры нуль.
+2. Подмножество множества меры нуль — множество меры нуль.`
+    },
+
 ];

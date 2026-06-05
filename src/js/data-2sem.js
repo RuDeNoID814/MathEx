@@ -85,8 +85,8 @@ $$\\forall \\varepsilon > 0 \\;\\; \\exists N \\in \\mathbb{N} \\;\\; \\forall k
         question: "Шар в метрическом пространстве. Внутренняя точка множества в Rn. Открытое множество в Rn",
         answer: `Шар: $$B_r(a) = \\{ x \\in \\mathbb{R}^n : d(x, a) < r \\}$$
         
-                Внутренняя точка множества в $\\mathbb{R}^n$ : Точка $x$ называется внутренней точкой множества $M$, если $x 
-                \\in M \\Rightarrow \\exists r \\in \\mathbb{R}_+ : B_r(x) \\in M$
+                Внутренняя точка множества в $\\mathbb{R}^n$ : Точка $x$ называется внутренней точкой множества $M$, если $x
+                \\in M \\Rightarrow \\exists r \\in \\mathbb{R}_+ : B_r(x) \\subseteq M$
                 
                 Открытое множество в $\\mathbb{R}^n$: $M$  называется открытым, если $M^\\circ = M$`
     },
@@ -210,7 +210,7 @@ $$\\operatorname{diam} = \\sqrt{\\sum_{i=1}^n (b_i - a_i)^2}$$`
 
 Скалярным произведением называется отображение $f: X \\times X \\to \\mathbb{R}$, где $X$ — векторное пространство, со свойствами:
 
-1. $f(x, x) > 0$ — положительность.
+1. $f(x, x) \\ge 0$ — положительность.
 2. $\\forall x, y: f(x, y) = f(y, x)$ — симметричность.
 3. $\\forall x, y, z: f(x, y + z) = f(x, y) + f(x, z)$ — аддитивность.
 4. $\\forall \\lambda \\in \\mathbb{R}: f(x, \\lambda y) = \\lambda f(x, y)$ — однородность.`
@@ -236,7 +236,12 @@ $$(x, y) = \\sum_{i=1}^n x^i y^i$$
         id: 1021,
         tag: "Евклидова структура пространства R^n",
         question: "Норма вектора в пространстве $R^n$",
-        answer: `Вектор $x$ называется нормированным, если $\\|x\\| = 1$.`
+        answer: `Пространство $X$ называется нормированным, если $\\forall x \\in X$ определена норма $\\|x\\|$ со свойствами:
+
+1. $\\|0\\| = 0$
+2. $\\forall x \\neq 0: \\|x\\| > 0$
+3. $\\forall \\alpha \\in \\mathbb{R}: \\|\\alpha x\\| = |\\alpha| \\cdot \\|x\\|$
+4. $\\forall x, y \\in X: \\|x + y\\| \\le \\|x\\| + \\|y\\|$`
     },
 
     {
@@ -460,7 +465,7 @@ $$y'(x) = -\\frac{\\dfrac{\\partial F}{\\partial x}(x, y(x))}{\\dfrac{\\partial 
         question: "Якобиан сферической замены координат",
         answer: `$$\\begin{cases} x = r \\sin\\psi \\cos\\varphi \\\\ y = r \\sin\\psi \\sin\\varphi \\\\ z = r \\cos\\psi \\end{cases} \\quad \\text{где } 0 \\le \\psi \\le \\pi, \\quad 0 \\le \\varphi \\le 2\\pi$$
 
-$$|J| = \\begin{vmatrix} \\sin\\psi\\cos\\varphi & \\sin\\psi\\sin\\varphi & \\cos\\psi \\\\ -r\\sin\\psi\\sin\\varphi & r\\sin\\psi\\cos\\varphi & 0 \\\\ -r\\cos\\psi\\cos\\varphi & -r\\cos\\psi\\sin\\varphi & r\\cos\\psi \\end{vmatrix} = \\dots = r^2 \\cos\\psi$$`
+$$|J| = \\begin{vmatrix} \\sin\\psi\\cos\\varphi & \\sin\\psi\\sin\\varphi & \\cos\\psi \\\\ -r\\sin\\psi\\sin\\varphi & r\\sin\\psi\\cos\\varphi & 0 \\\\ -r\\cos\\psi\\cos\\varphi & -r\\cos\\psi\\sin\\varphi & r\\cos\\psi \\end{vmatrix} = \\dots = r^2 \\sin\\psi$$`
     },
 
     {
@@ -649,7 +654,7 @@ $$\\mathcal{L}(\\mathbf{x}, \\boldsymbol{\\lambda}) = f(\\mathbf{x}) + \\sum_{k=
         tag: "Мера Жордана",
         question: "Определение клетки",
         answer: `Клеткой называется множество:
-$$\\Pi = \\{ (x^1, \\dots, x^n) \\in \\mathbb{R}^n : a_i \\le x^i < b_i, \\; i = \\overline{1,n} \\}$$`
+$$\\Pi = \\{ (x^1, \\dots, x^n) \\in \\mathbb{R}^n : a_i \\le x^i \\le b_i, \\; i = \\overline{1,n} \\}$$`
     },
 
     {
@@ -670,6 +675,9 @@ $$\\Pi = \\{ (x^1, \\dots, x^n) \\in \\mathbb{R}^n : a_i \\le x^i < b_i, \\; i =
         question: "Клеточное множество. Мера клеточного множества",
         answer: `Клеточным множеством называется конечное объединение попарно непересекающихся клеток:
 $$\\tilde{\\Pi} = \\bigcup_{i=1}^m \\Pi_i$$
+
+Мера клетки $\\Pi = [a_1,b_1] \\times \\dots \\times [a_n,b_n]$:
+$$m(\\Pi) = (b_1 - a_1)(b_2 - a_2) \\cdots (b_n - a_n)$$
 
 Мера клеточного множества:
 $$m(\\tilde{\\Pi}) = \\sum_{i=1}^m m(\\Pi_i)$$`

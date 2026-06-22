@@ -257,10 +257,18 @@ body {
 .card-answer {
     padding: 14px;
     border-top: 1px solid var(--border);
+    overflow: visible;
+}
+
+mjx-container[display="true"] {
     overflow-x: auto;
     max-width: 100%;
+    display: block !important;
     -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
 }
+
+mjx-container[display="true"]::-webkit-scrollbar { display: none; }
 
 .answer-label {
     font-size: 9px;
@@ -361,7 +369,7 @@ mark {
     padding: 0 2px;
 }
 
-.spacer { height: max(env(safe-area-inset-bottom), 16px); }
+.spacer { height: 60vh; }
 
 /* GRAPH CARD */
 .graph-card-inner {

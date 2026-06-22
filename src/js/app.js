@@ -51,10 +51,16 @@ buildTags();
 const searchInput = document.getElementById('searchInput');
 const clearBtn = document.getElementById('clearBtn');
 
+let renderTimer = 0;
+function scheduleRender() {
+    clearTimeout(renderTimer);
+    renderTimer = setTimeout(render, 70);
+}
+
 searchInput.addEventListener('input', () => {
     searchQuery = searchInput.value.trim().toLowerCase();
     clearBtn.classList.toggle('visible', searchQuery.length > 0);
-    render();
+    scheduleRender();
 });
 
 clearBtn.addEventListener('click', () => {
@@ -62,7 +68,87 @@ clearBtn.addEventListener('click', () => {
     searchQuery = '';
     clearBtn.classList.remove('visible');
     render();
-    searchInput.focus();
+    if (!kbdOn) searchInput.focus();
+});
+
+// Custom on-screen keyboard (so phone can stay in sleeve)
+const kbdToggle = document.getElementById('kbdToggle');
+const kbdPanel = document.getElementById('kbdPanel');
+let kbdOn = false;
+
+const KBD_ROWS = ['йцукенгшщзхъ', 'фывапролджэ', 'ячсмитьбюё'];
+
+function press(ch) {
+    if (ch === 'BS') {
+        searchInput.value = searchInput.value.slice(0, -1);
+    } else {
+        searchInput.value += ch;
+    }
+    searchQuery = searchInput.value.trim().toLowerCase();
+    clearBtn.classList.toggle('visible', searchQuery.length > 0);
+    scheduleRender();
+}
+
+function bindKey(el, ch) {
+    let pressed = false;
+    const down = e => {
+        e.preventDefault();
+        if (pressed) return;
+        pressed = true;
+        el.classList.add('pressed');
+        press(ch);
+    };
+    const up = () => {
+        pressed = false;
+        el.classList.remove('pressed');
+    };
+    el.addEventListener('touchstart', down, { passive: false });
+    el.addEventListener('touchend', up);
+    el.addEventListener('touchcancel', up);
+    el.addEventListener('mousedown', down);
+    el.addEventListener('mouseup', up);
+    el.addEventListener('mouseleave', up);
+}
+
+KBD_ROWS.forEach(row => {
+    const rowEl = document.createElement('div');
+    rowEl.className = 'kbd-row';
+    [...row].forEach(ch => {
+        const k = document.createElement('button');
+        k.className = 'kbd-key';
+        k.type = 'button';
+        k.textContent = ch;
+        bindKey(k, ch);
+        rowEl.appendChild(k);
+    });
+    kbdPanel.appendChild(rowEl);
+});
+const bottomRow = document.createElement('div');
+bottomRow.className = 'kbd-row';
+const space = document.createElement('button');
+space.className = 'kbd-key wide';
+space.type = 'button';
+space.textContent = 'пробел';
+bindKey(space, ' ');
+const back = document.createElement('button');
+back.className = 'kbd-key';
+back.type = 'button';
+back.textContent = '⌫';
+bindKey(back, 'BS');
+bottomRow.appendChild(space);
+bottomRow.appendChild(back);
+kbdPanel.appendChild(bottomRow);
+
+kbdToggle.addEventListener('click', () => {
+    kbdOn = !kbdOn;
+    kbdPanel.classList.toggle('visible', kbdOn);
+    kbdToggle.classList.toggle('active', kbdOn);
+    if (kbdOn) {
+        searchInput.setAttribute('inputmode', 'none');
+        searchInput.blur();
+    } else {
+        searchInput.removeAttribute('inputmode');
+    }
 });
 
 function highlight(text, q) {

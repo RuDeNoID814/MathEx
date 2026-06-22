@@ -9,7 +9,7 @@
     <meta name="theme-color" content="#0b0b0e">
     <title>MathEx</title>
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="src/css/style.css?v=3">
+    <link rel="stylesheet" href="src/css/style.css?v=5">
     <link rel="manifest" href="manifest.json">
     <script>
         MathJax = {
@@ -30,6 +30,8 @@
         <input class="search-input" type="search" placeholder="Поиск по вопросам..." id="searchInput" autocomplete="off" autocorrect="off" spellcheck="false">
         <button class="clear-btn" id="clearBtn">✕</button>
     </div>
+    <button class="kbd-toggle" id="kbdToggle" type="button">⌨ Своя клавиатура</button>
+    <div class="kbd-panel" id="kbdPanel"></div>
 </div>
 
 <div class="sem-row" id="semRow"></div>
@@ -40,6 +42,6 @@
 <script src="src/js/data.js"></script>
 <script src="src/js/data-2sem.js"></script>
 <script src="src/js/graphs.js"></script>
-<script src="src/js/app.js"></script>
+<script src="src/js/app.js?v=5"></script>
 </body>
 </html>

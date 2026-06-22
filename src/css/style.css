@@ -110,6 +110,71 @@ body {
 
 .clear-btn.visible { display: flex; }
 
+/* CUSTOM KEYBOARD */
+.kbd-toggle {
+    display: block;
+    width: 100%;
+    margin-top: 8px;
+    background: var(--card2);
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    padding: 7px 10px;
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 600;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    letter-spacing: 0.3px;
+}
+.kbd-toggle.active {
+    background: var(--accent2);
+    border-color: var(--accent2);
+    color: #fff;
+}
+
+.kbd-panel {
+    display: none;
+    margin-top: 8px;
+    padding: 7px 5px;
+    background: var(--card2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+}
+.kbd-panel.visible { display: block; }
+.kbd-row {
+    display: flex;
+    gap: 3px;
+    margin-bottom: 3px;
+}
+.kbd-row:last-child { margin-bottom: 0; }
+.kbd-key {
+    flex: 1;
+    min-width: 0;
+    height: 40px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text);
+    font-size: 16px;
+    font-weight: 500;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    padding: 0;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    transition: background-color 0.05s, border-color 0.05s, transform 0.05s;
+}
+.kbd-key.pressed,
+.kbd-key:active {
+    background: var(--accent2);
+    border-color: var(--accent2);
+    color: #fff;
+    transform: scale(0.92);
+}
+.kbd-key.wide { flex: 3; }
+
 /* SEMESTER SWITCHER */
 .sem-row {
     display: flex;

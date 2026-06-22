@@ -76,7 +76,15 @@ const kbdToggle = document.getElementById('kbdToggle');
 const kbdPanel = document.getElementById('kbdPanel');
 let kbdOn = false;
 
-const KBD_ROWS = ['йцукенгшщзхъ', 'фывапролджэ', 'ячсмитьбюё'];
+const KBD_DIGITS = '1234567890';
+const KBD_LAYOUTS = {
+    letters: ['йцукенгшщзхъ', 'фывапролджэ', 'ячсмитьбюё'],
+    latin:   ['qwertyuiop', 'asdfghjkl', 'zxcvbnm'],
+    symbols: [',.-+=()[]<>', '!?:;"\'/\\@#', '*&%^$№~`|_']
+};
+const KBD_CYCLE = ['letters', 'latin', 'symbols'];
+const KBD_LABEL = { letters: 'ABC', latin: '#?!', symbols: 'АБВ' };
+let kbdLayout = 'letters';
 
 function press(ch) {
     if (ch === 'BS') {
@@ -110,10 +118,10 @@ function bindKey(el, ch) {
     el.addEventListener('mouseleave', up);
 }
 
-KBD_ROWS.forEach(row => {
+function makeRow(chars) {
     const rowEl = document.createElement('div');
     rowEl.className = 'kbd-row';
-    [...row].forEach(ch => {
+    [...chars].forEach(ch => {
         const k = document.createElement('button');
         k.className = 'kbd-key';
         k.type = 'button';
@@ -121,23 +129,50 @@ KBD_ROWS.forEach(row => {
         bindKey(k, ch);
         rowEl.appendChild(k);
     });
-    kbdPanel.appendChild(rowEl);
-});
+    return rowEl;
+}
+
+// Always-visible top row: digits
+kbdPanel.appendChild(makeRow(KBD_DIGITS));
+
+// Swappable area for letters/symbols
+const kbdSwap = document.createElement('div');
+kbdSwap.className = 'kbd-swap';
+kbdPanel.appendChild(kbdSwap);
+
+function renderLayout() {
+    kbdSwap.innerHTML = '';
+    KBD_LAYOUTS[kbdLayout].forEach(row => kbdSwap.appendChild(makeRow(row)));
+    layoutBtn.textContent = KBD_LABEL[kbdLayout];
+}
+
+// Bottom row: layout toggle + space + backspace
 const bottomRow = document.createElement('div');
 bottomRow.className = 'kbd-row';
+const layoutBtn = document.createElement('button');
+layoutBtn.className = 'kbd-key kbd-fn';
+layoutBtn.type = 'button';
+layoutBtn.addEventListener('click', e => {
+    e.preventDefault();
+    kbdLayout = KBD_CYCLE[(KBD_CYCLE.indexOf(kbdLayout) + 1) % KBD_CYCLE.length];
+    renderLayout();
+});
 const space = document.createElement('button');
 space.className = 'kbd-key wide';
 space.type = 'button';
 space.textContent = 'пробел';
 bindKey(space, ' ');
 const back = document.createElement('button');
-back.className = 'kbd-key';
+back.className = 'kbd-key kbd-fn';
 back.type = 'button';
 back.textContent = '⌫';
 bindKey(back, 'BS');
+bottomRow.appendChild(layoutBtn);
 bottomRow.appendChild(space);
 bottomRow.appendChild(back);
 kbdPanel.appendChild(bottomRow);
+
+renderLayout();
 
 kbdToggle.addEventListener('click', () => {
     kbdOn = !kbdOn;
